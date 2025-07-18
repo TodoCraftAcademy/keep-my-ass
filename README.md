@@ -11,13 +11,13 @@ An Electron application with Vue and TypeScript
 ### Install
 
 ```bash
-$ pnpm install
+pnpm install
 ```
 
 ### Development
 
 ```bash
-$ pnpm dev
+pnpm dev
 ```
 
 ### Build
@@ -32,3 +32,11 @@ $ pnpm build:mac
 # For Linux
 $ pnpm build:linux
 ```
+
+### 分支规范
+
+- 主分支：`main`
+- 开发分支：`dev`
+- 功能开发分支：`feat/xxx`
+- bugfix分支：`fix/xxx`
+- 文档分支：`docs/xxx`

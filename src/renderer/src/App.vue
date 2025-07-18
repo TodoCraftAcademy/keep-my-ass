@@ -10,7 +10,7 @@ const ipcHandle = (): void => window.electron.ipcRenderer.send('ping')
   <div class="text">
     Build an Electron app with
     <span class="vue">Vue</span>
-    and
+    and 1223
     <span class="ts">TypeScript</span>
   </div>
   <p class="tip">Please try pressing <code>F12</code> to open the devTool</p>

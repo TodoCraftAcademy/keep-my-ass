@@ -1,8 +1,9 @@
-import { ElectronAPI } from '@electron-toolkit/preload'
+export interface IElectronAPI {
+  // 为将来的 IPC 通信预留类型定义
+}
 
 declare global {
   interface Window {
-    electron: ElectronAPI
-    api: unknown
+    electronAPI: IElectronAPI
   }
 }

@@ -6,6 +6,7 @@
     <NLayoutContent style="padding: 20px">
       <!-- Main content area -->
       <div id="main-content">
+        <AddTodoForm />
         <!-- Todo list or other main content will be placed here -->
       </div>
     </NLayoutContent>
@@ -15,6 +16,7 @@
 <script setup lang="ts">
 import { NFlex, NLayoutHeader, NLayoutContent } from 'naive-ui'
 import AppHeader from './components/AppHeader.vue'
+import AddTodoForm from './components/AddTodoForm.vue'
 </script>
 
 <style>

@@ -1,25 +1,33 @@
 <template>
   <NForm class="add-todo-form" @submit.prevent="handleSubmit">
-    <NFlex align="center" :wrap="false">
-      <NInput
-        ref="inputRef"
-        v-model:value="todoText"
-        type="text"
-        placeholder="添加新的待办事项..."
-        clearable
-        :status="inputStatus"
-        class="todo-input"
-        @keydown.enter="handleSubmit"
-        @keydown.esc="handleClear"
-        @input="handleInput"
-      />
-      <NButton type="primary" :disabled="!isValidInput" class="submit-button" @click="handleSubmit">
-        添加
-      </NButton>
+    <NFlex vertical :size="12">
+      <NFlex align="flex-start" :wrap="false">
+        <NInput
+          ref="inputRef"
+          v-model:value="todoText"
+          type="textarea"
+          placeholder="添加新的待办事项...（Ctrl+Enter 或 Shift+Enter 提交）"
+          clearable
+          :status="inputStatus"
+          :autosize="{ minRows: 1, maxRows: 4 }"
+          class="todo-input"
+          @keydown.enter="handleKeyboardSubmit"
+          @keydown.esc="handleClear"
+          @input="handleInput"
+        />
+        <NButton
+          type="primary"
+          :disabled="!isValidInput"
+          class="submit-button"
+          @click="handleClick"
+        >
+          添加
+        </NButton>
+      </NFlex>
+      <div v-if="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
     </NFlex>
-    <div v-if="errorMessage" class="error-message">
-      {{ errorMessage }}
-    </div>
   </NForm>
 </template>
 
@@ -49,7 +57,7 @@ const handleInput = (): void => {
   }
 }
 
-const handleSubmit = async (): Promise<void> => {
+const submitTodo = async (): Promise<void> => {
   const text = todoText.value.trim()
 
   if (!text) {
@@ -71,6 +79,23 @@ const handleSubmit = async (): Promise<void> => {
   }
 }
 
+const handleSubmit = (event: Event): void => {
+  event.preventDefault()
+  submitTodo()
+}
+
+const handleClick = (): void => {
+  submitTodo()
+}
+
+const handleKeyboardSubmit = (event: KeyboardEvent): void => {
+  // 只有在按下 Ctrl+Enter 或 Shift+Enter 时才提交
+  if (event.ctrlKey || event.shiftKey) {
+    event.preventDefault()
+    submitTodo()
+  }
+}
+
 const handleClear = (): void => {
   todoText.value = ''
   errorMessage.value = ''
@@ -81,7 +106,6 @@ const handleClear = (): void => {
 .add-todo-form {
   width: 100%;
   max-width: 600px;
-  margin: 0 auto;
 }
 
 .todo-input {
@@ -92,12 +116,12 @@ const handleClear = (): void => {
 .submit-button {
   flex-shrink: 0;
   margin-left: 12px;
+  align-self: flex-start;
 }
 
 .error-message {
   color: #d03050;
   font-size: 12px;
-  margin-top: 8px;
   text-align: left;
 }
 

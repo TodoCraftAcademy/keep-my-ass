@@ -11,22 +11,18 @@
 
 ## 2. 功能实现
 
-1.定义 Todo 接口（id, text, completed, createdAt, updatedAt）
-2.定义 TodoFilter 枚举（ALL, ACTIVE, COMPLETED）
-3.定义辅助类型（如 TodoInput, TodoUpdate）
-4.添加数据验证函数（isValidTodoInput）
-5.添加工厂函数（createTodo）
+1.定义 Todo 接口（id, text, completed, createdAt, updatedAt）2.定义 TodoFilter 枚举（ALL, ACTIVE, COMPLETED）3.定义辅助类型（如 TodoInput, TodoUpdate）4.添加数据验证函数（isValidTodoInput）5.添加工厂函数（createTodo）
 
 ## 3. 核心类型
 
 ### 3.1 `Todo`
 
-| 字段 | 类型 | 说明 |
-| ---- | ---- | ---- |
-| `id` | `string` | 采用 `crypto.randomUUID()` 生成的全局唯一标识，确保列表操作的可靠性。 |
-| `text` | `string` | 任务描述，保存用户输入的原始文本，允许富文本扩展。 |
-| `completed` | `boolean` | 任务完成状态，粒度为单任务级别。 |
-| `createdAt` / `updatedAt` | `Date` | 创建/更新时间，支持排序、统计与审计。 |
+| 字段                      | 类型      | 说明                                                                  |
+| ------------------------- | --------- | --------------------------------------------------------------------- |
+| `id`                      | `string`  | 采用 `crypto.randomUUID()` 生成的全局唯一标识，确保列表操作的可靠性。 |
+| `text`                    | `string`  | 任务描述，保存用户输入的原始文本，允许富文本扩展。                    |
+| `completed`               | `boolean` | 任务完成状态，粒度为单任务级别。                                      |
+| `createdAt` / `updatedAt` | `Date`    | 创建/更新时间，支持排序、统计与审计。                                 |
 
 > 采用 `Date` 而非字符串，统一由业务层负责序列化与反序列化，避免组件层误用。
 

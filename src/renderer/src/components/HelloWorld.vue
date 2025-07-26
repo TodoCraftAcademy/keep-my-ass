@@ -6,7 +6,7 @@
 
 <script lang="ts" setup>
 interface Props {
-  msg: string
+  msg?: string
 }
 
 withDefaults(defineProps<Props>(), {

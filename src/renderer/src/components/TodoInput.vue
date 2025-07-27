@@ -12,7 +12,6 @@
           :autosize="{ minRows: 1, maxRows: 4 }"
           class="todo-input"
           @keydown.enter="handleKeyboardSubmit"
-          @keydown.esc="handleClear"
           @input="handleInput"
         />
         <NButton
@@ -34,7 +33,7 @@
 <script setup lang="ts">
 import { ref, computed, nextTick } from 'vue'
 import { NForm, NFlex, NInput, NButton } from 'naive-ui'
-import { useTodoStore } from '../stores/taskStore'
+import { useTodoStore } from '../stores/todoStore'
 
 const todoStore = useTodoStore()
 
@@ -95,17 +94,11 @@ const handleKeyboardSubmit = (event: KeyboardEvent): void => {
     submitTodo()
   }
 }
-
-const handleClear = (): void => {
-  todoText.value = ''
-  errorMessage.value = ''
-}
 </script>
 
 <style scoped>
 .add-todo-form {
   width: 100%;
-  max-width: 600px;
 }
 
 .todo-input {

@@ -50,7 +50,7 @@ export const useTodoStore = defineStore('todo', {
      * @private
      */
     _saveState() {
-      this.history.push(structuredClone(this.todos))
+      this.history.push(this.todos)
     },
     /**
      * 创建并添加一个新的待办事项

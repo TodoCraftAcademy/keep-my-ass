@@ -3,20 +3,36 @@
     <NLayoutHeader bordered>
       <AppHeader />
     </NLayoutHeader>
-    <NLayoutContent style="padding: 20px">
+    <NLayoutContent>
       <!-- Main content area -->
-      <div id="main-content">
-        <AddTodoForm />
-        <!-- Todo list or other main content will be placed here -->
-      </div>
+      <NScrollbar>
+        <div id="main-content">
+          <!-- Todo list or other main content will be placed here -->
+          <TodoItem
+            v-for="item in taskStore.filteredTodos"
+            :key="item.id"
+            :item="item"
+            @delete="handleDelete"
+          />
+          <AddTodoForm id="add-todo-form" />
+        </div>
+      </NScrollbar>
     </NLayoutContent>
   </NFlex>
 </template>
 
 <script setup lang="ts">
-import { NFlex, NLayoutHeader, NLayoutContent } from 'naive-ui'
+import { NFlex, NLayoutHeader, NLayoutContent, NScrollbar } from 'naive-ui'
+import TodoItem from './components/TodoItem.vue'
 import AppHeader from './components/AppHeader.vue'
-import AddTodoForm from './components/AddTodoForm.vue'
+import AddTodoForm from './components/TodoInput.vue'
+import { useTodoStore } from './stores/todoStore'
+
+const taskStore = useTodoStore()
+
+function handleDelete(id: string): void {
+  taskStore.removeTodo(id)
+}
 </script>
 
 <style>
@@ -35,7 +51,6 @@ body {
     'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
 }
 
@@ -48,5 +63,11 @@ body {
 
 #main-content {
   height: 100%;
+  padding: 20px;
+}
+
+#add-todo-form {
+  margin-top: 20px;
+  width: 100%;
 }
 </style>

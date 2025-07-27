@@ -1,19 +1,14 @@
 <script setup lang="ts">
-import { ref, defineProps, defineEmits } from 'vue'
-
-interface TodoItem {
-  id: number
-  text: string
-  completed: boolean
-}
+import { ref } from 'vue'
+import { Todo } from '../types/Todo'
 
 const props = defineProps<{
-  item: TodoItem
+  item: Todo
 }>()
 
 const emit = defineEmits<{
-  update: [item: TodoItem]
-  delete: [id: number]
+  update: [item: Todo]
+  delete: [id: string]
 }>()
 
 const isEditing = ref(false)
